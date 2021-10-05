@@ -16,6 +16,7 @@ namespace SuncoastHumanResources
 
   class Program
   {
+    //Display greeting helper method
     static void DisplayGreeting()
     {
       Console.WriteLine("----------------------------------------");
@@ -24,15 +25,14 @@ namespace SuncoastHumanResources
       Console.WriteLine();
       Console.WriteLine();
     }
-
+    //PromptForString helper method
     static string PromptForString(string prompt)
     {
       Console.Write(prompt);
       var userInput = Console.ReadLine();
-
       return userInput;
     }
-
+    //PromptForInteger helper method
     static int PromptForInteger(string prompt)
     {
       Console.Write(prompt);
@@ -42,13 +42,13 @@ namespace SuncoastHumanResources
       if (isThisGoodInput)
       {
         return userInput;
-      }
+      }//end of if
       else
       {
         Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
         return 0;
-      }
-    }
+      }//end of else
+    }//end of PromptForInteger method
 
     static void Main(string[] args)
     {
@@ -56,9 +56,9 @@ namespace SuncoastHumanResources
       var employees = new List<Employee>();
 
       // Should we keep showing the menu?
-
       var keepGoing = true;
 
+      //We call our helper method
       DisplayGreeting();
 
       // While the user hasn't said QUIT yet
@@ -66,12 +66,14 @@ namespace SuncoastHumanResources
         // Insert a blank line then prompt them and get their answer (force uppercase)
         Console.WriteLine();
         Console.Write("What do you want to do? (A)dd an employee or (S)how all the employees or (F)ind an employee or (Q)uit: ");
+
         var choice = Console.ReadLine().ToUpper();
 
         if (choice == "Q") {
           // They said quit, so set our keepGoing to false
           keepGoing = false;
-        } else if (choice == "F") {
+        }//end of if "Q" 
+        else if (choice == "F") {
           // Ask for the name of an employee
           var name = PromptForString("What name are you looking for? ");
 
@@ -85,23 +87,25 @@ namespace SuncoastHumanResources
             if (employee.Name == name) {
               // ... then store this employee in the foundEmployee variable
               foundEmployee = employee;
-            }
-          }
-
+            }//end of if
+          }//end of foreach          
           // If the foundEmployee is still null, nothing was found
           if (foundEmployee == null) {
             Console.WriteLine("No match found");
-          } else {
+          }//end of if 
+          else {
             // Otherwise print details of the found employee
             Console.WriteLine($"{foundEmployee.Name} is in department {foundEmployee.Department} and makes ${foundEmployee.Salary}");
-          }
-        } else if (choice == "S") {
+          }//end of else
+        }//end of else if choice "F" 
+        else if (choice == "S") {
           // Loop through each employee
           foreach(var employee in employees) {
             // And print details
             Console.WriteLine($"{employee.Name} is in department {employee.Department} and makes ${employee.Salary}");
-          }
-        } else {
+          }//end foreach
+        }//end of else if "S" 
+        else {
           // Make a new employee object
           var employee = new Employee();
 
@@ -112,10 +116,8 @@ namespace SuncoastHumanResources
 
           // Add it to the list
           employees.Add(employee);
-        }
-
-        // end of the `while` statement
-      }
+        }//End of else
+      }// end of the `while` statement
     }
   }
 }
